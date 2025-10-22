@@ -4,7 +4,7 @@
 
 ## 项目简介
 
-本项目提供了一个简洁的 AI 模型管理 API，支持获取模型列表信息。API 返回格式符合统一的 BaseResponse 规范，便于前端集成使用。
+本项目提供了一个简洁的 AI 模型管理 API，支持获取模型列表信息。当前集成了 DeepSeek 大语言模型，API 返回格式符合统一的 BaseResponse 规范，便于前端集成使用。
 
 ## 技术栈
 
@@ -66,44 +66,42 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 服务启动后，可以通过以下方式验证：
 
 - **API 文档**: http://localhost:8000/docs
-- **API 接口**: http://localhost:8000/api/system/model/modelList
+- **API 接口**: http://localhost:8000/system/model/modelList
 - **运行测试**: `python test_api.py`
 
 ## API 接口
 
 ### 获取模型列表
 
-**接口地址**: `GET /api/system/model/modelList`
+**接口地址**: `GET /system/model/modelList`
 
 **响应格式**:
 ```json
 {
   "code": 200,
-  "data": null,
-  "msg": "获取模型列表成功",
-  "rows": [
+  "data": [
     {
       "id": 1,
       "category": "AI助手",
-      "modelName": "GPT-4",
-      "modelDescribe": "OpenAI最新的大语言模型，具有强大的理解和生成能力",
-      "modelPrice": 0.03,
+      "modelName": "deepseek",
+      "modelDescribe": "DeepSeek大语言模型，具有强大的推理和代码生成能力",
+      "modelPrice": 0.001,
       "modelType": "chat",
-      "modelShow": "GPT-4",
-      "systemPrompt": "你是一个有用的AI助手，请提供准确和有帮助的回答。",
-      "apiHost": "https://api.openai.com",
+      "modelShow": "DeepSeek",
+      "systemPrompt": "你是一个专业的AI助手，擅长推理、编程和问题解决。",
+      "apiHost": "https://api.deepseek.com",
       "apiKey": "sk-xxx",
-      "remark": "高质量对话模型，适合复杂任务"
+      "remark": "高性能推理模型，适合编程和复杂推理任务"
     }
-  ]
+  ],
+  "msg": "获取模型列表成功"
 }
 ```
 
 **字段说明**:
 - `code`: 响应状态码（200 成功，500 失败）
-- `data`: 额外数据（当前为 null）
+- `data`: 模型列表数据
 - `msg`: 响应消息
-- `rows`: 模型列表数据
 
 **模型对象字段**:
 - `id`: 模型唯一标识
@@ -126,17 +124,17 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 ```python
 {
-    "id": 4,
-    "category": "新分类",
-    "modelName": "新模型",
-    "modelDescribe": "模型描述",
-    "modelPrice": 0.01,
+    "id": 2,
+    "category": "AI助手",
+    "modelName": "gpt-4",
+    "modelDescribe": "OpenAI GPT-4模型，具有强大的理解和生成能力",
+    "modelPrice": 0.03,
     "modelType": "chat",
-    "modelShow": "显示名称",
-    "systemPrompt": "系统提示词",
-    "apiHost": "https://api.example.com",
-    "apiKey": "your-api-key",
-    "remark": "备注信息"
+    "modelShow": "GPT-4",
+    "systemPrompt": "你是一个有用的AI助手，请提供准确和有帮助的回答。",
+    "apiHost": "https://api.openai.com",
+    "apiKey": "sk-your-openai-key",
+    "remark": "高质量对话模型，适合复杂任务"
 }
 ```
 

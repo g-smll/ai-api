@@ -62,3 +62,23 @@ class BaseResponse(BaseModel, Generic[T]):
                 "rows": []
             }
         }
+
+
+class Album(BaseModel):
+    id: int
+    singerName: str
+    albumName: str
+    releaseDate: str
+    genre: Optional[str] = None
+
+
+class Pagination(BaseModel):
+    page: int
+    size: int
+    total: int
+    pages: int
+
+
+class PageData(BaseModel, Generic[T]):
+    items: List[T]
+    pagination: Pagination
